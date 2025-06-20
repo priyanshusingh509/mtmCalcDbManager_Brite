@@ -1,6 +1,7 @@
 *.csv
 *.txt
 uuid
+offset.json
 
 data/
 flags
