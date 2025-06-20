@@ -1,0 +1,14 @@
+*.csv
+*.txt
+uuid
+
+data/
+flags
+format_schemas
+metadata
+metadata_dropped
+node_modules
+preprocessed_configs
+store
+tmp
+user_files

@@ -1,0 +1,22 @@
+{
+  "name": "baseserver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@clickhouse/client": "^1.11.2",
+    "chokidar": "^4.0.3",
+    "clickhouse": "^2.6.0",
+    "csv-parser": "^3.2.0",
+    "dotenv": "^16.5.0",
+    "fast-csv": "^5.0.2",
+    "kafkajs": "^2.2.4",
+    "tail": "^2.2.6"
+  }
+}
