@@ -2,7 +2,7 @@
 *.txt
 uuid
 offset.json
-
+offset2.json
 data/
 flags
 format_schemas
@@ -13,3 +13,5 @@ preprocessed_configs
 store
 tmp
 user_files
+/offset
+.env

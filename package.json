@@ -14,9 +14,11 @@
     "chokidar": "^4.0.3",
     "clickhouse": "^2.6.0",
     "csv-parser": "^3.2.0",
+    "date-fns": "^4.1.0",
     "dotenv": "^16.5.0",
     "fast-csv": "^5.0.2",
     "kafkajs": "^2.2.4",
+    "snappy": "^7.2.2",
     "tail": "^2.2.6"
   }
 }
