@@ -286,19 +286,15 @@ async function readFile() {
           const cleanedLine = cleanCsvLine(line);
           const parsed = await parseCsvRow(cleanedLine);
           const mapped = mapRow(parsed);
-          // console.log(mapped)
           batch.push(mapped);
           if (batch.length >= CONFIG.batchSize) await publishBatch();
         } catch (err) {
           console.error("Parse error:", err);
         }
       }
-    //   console.log(batch[0]);
-    //   console.log("Done");
       position += bytesRead;
       offset = position;
     }
-    // console.log(batch)
     await publishBatch();
     await saveOffset(offset);
     await fileHandle.close();
@@ -355,20 +351,6 @@ async function switchToNewFile() {
   }
 }
 
-
-// const cleanup = async () => {
-//   console.log("Closing file handle...");
-//   if (handle) await handle.close();
-//   process.exit(0);
-// };
-
-// process.on("SIGINT", cleanup);
-// process.on("SIGTERM", cleanup);
-// process.on("exit", cleanup);
-// process.on("uncaughtException", (err) => {
-//   console.error("Unhandled error:", err);
-//   cleanup();
-// });
 
 (async () => {
   await initKafka();
