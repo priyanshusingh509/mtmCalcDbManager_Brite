@@ -48,7 +48,8 @@ const HEADER_MAPPING = {
   "Timestamp 3": "timestamp_3",
   "CTCL No": "ctcl_no",
   "Reserved7": "reserved7",
-  "Code": "code"
+  "Code": "code",
+  "_extra": "_extra"
 };
 
 
@@ -77,7 +78,8 @@ const FIELD_TYPES = {
   "Timestamp 3": "str",
   "CTCL No": "BigInt",
   "Reserved7": "str",
-  "Code": "str"
+  "Code": "str",
+  "_extra": "str"
 };
 
 
@@ -151,11 +153,28 @@ function mapRow(row) {
 
 function parseCsvRow(line) {
   return new Promise((resolve, reject) => {
-    parseString(line, { headers: CSV_HEADERS, delimiter: ",", strictColumnHandling: true })
+    let row;
+
+    parseString(line + "\n", {
+      headers: CSV_HEADERS,
+      delimiter: ",",
+      trim: true,
+      ignoreEmpty: true,
+      strictColumnHandling: false
+    })
       .on("error", reject)
-      .on("data", resolve);
+      .on("data", (data) => {
+        row = data; // capture the row
+      })
+      .on("end", () => {
+        if (!row) {
+          return reject(new Error("No data parsed from line"));
+        }
+        resolve(row);
+      });
   });
 }
+
 
 async function publishBatch() {
   if (batch.length === 0) return;
@@ -221,6 +240,8 @@ async function readFile() {
         try {
           // console.log(line)
           const parsed = await parseCsvRow(line);
+          delete parsed._extra;
+
           // console.log(parsed)
           const mapped = mapRow(parsed);
           // console.log(mapped)
